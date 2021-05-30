@@ -36,9 +36,9 @@ public class GrumScript : MonoBehaviour
         GameObject bullet = Instantiate(Bullet,transform.position + direction * 0.1f,Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
     }
-    public void Hit(){
-        health = health - 1;
-        if(health == 0){
+    public void Hit(int bonus){
+        health = health - (1 + bonus);
+        if(health <= 0){
             Destroy(gameObject);
         }
     } 

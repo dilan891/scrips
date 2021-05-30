@@ -8,6 +8,9 @@ public class BulletScript : MonoBehaviour
     public float speed;
     private Rigidbody2D Rigidbody2D;
     private Vector3 Direction;
+
+    public int Bonus;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,10 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void setBonus(int bonus){
+        Bonus = bonus;
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         playerMove player = other.GetComponent<playerMove>();
         GrumScript enemy = other.GetComponent<GrumScript>();
@@ -34,7 +41,7 @@ public class BulletScript : MonoBehaviour
             player.Hit();
         } 
         if (enemy != null){
-            enemy.Hit();
+            enemy.Hit(Bonus);
         }
     }
 

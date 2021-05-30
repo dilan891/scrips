@@ -7,13 +7,16 @@ public class playerMove : MonoBehaviour
     public GameObject Bullet;
     public float JumpForce;
     public float speed;
+    public int DamageBonus;
 
     private Rigidbody2D Rigidbody2D; 
     private float Horizontal;
     private bool suelo;
     private Animator Animator;
     private float LastShoot;
-    private int health = 10;
+    public int health = 10;
+    private float TimeBonus;
+    private float bonusInitTime;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,10 @@ public class playerMove : MonoBehaviour
         {
             Jump();
         }
+
+        if((Time.time - bonusInitTime)>TimeBonus){
+            DamageBonus = 0;
+        }
     }
 
     private void Jump()
@@ -67,8 +74,9 @@ public class playerMove : MonoBehaviour
         if(transform.localScale.x == 1.0f){
             direction = Vector2.right;
         }else direction = Vector2.left;
-
+        GetComponent<moneyScript>().viewCash();
         GameObject Bullets = Instantiate(Bullet,transform.position + direction * 0.1f ,Quaternion.identity);
+        Bullets.GetComponent<BulletScript>().setBonus(DamageBonus);
         Bullets.GetComponent<BulletScript>().SetDirection(direction);
     }
 
@@ -79,8 +87,23 @@ public class playerMove : MonoBehaviour
 
     public void Hit(){
         health = health - 1;
-        if(health == 0){
+        if(health <= 0){
             Destroy(gameObject);
         }
     }
+
+    public void damageBonus(int Bonus,float time,int healhing){
+        DamageBonus = Bonus;
+        TimeBonus = time;
+        bonusInitTime = Time.time;
+        for(int i=0;i < healhing;i++){
+            if(health == 10){
+                break;
+            }
+            else{
+               health += 1; 
+            }          
+        }
+    }
+
 }
