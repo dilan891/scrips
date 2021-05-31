@@ -51,6 +51,7 @@ public class playerMove : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) && Time.time >  LastShoot + 0.25f){
             shoot();
+            Debug.Log(DamageBonus);
             LastShoot = Time.time;
         }
 
@@ -59,8 +60,9 @@ public class playerMove : MonoBehaviour
             Jump();
         }
 
-        if((Time.time - bonusInitTime)>TimeBonus){
-            DamageBonus = 0;
+        if((Time.time - bonusInitTime)>TimeBonus&& DamageBonus != 0) {
+            DamageBonus = 0;    
+            Debug.Log(DamageBonus);
         }
     }
 
