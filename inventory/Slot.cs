@@ -21,9 +21,9 @@ public class Slot : MonoBehaviour
    public bool empty;
    public Sprite icon;
 
-   public Transform SlotIcon;
+   public Sprite noneIcon;
 
-    private Button button;
+   public Transform SlotIcon;
 
    private void Start() {
     empty = true;
@@ -35,8 +35,20 @@ public class Slot : MonoBehaviour
     }
     public void effect(){
         playerMove player = Player.GetComponent<playerMove>();
-        Debug.Log(player.JumpForce);
+        inventory playerInventory = player.GetComponent<inventory>();
         player.damageBonus(BonusDamage,duration,healhing);
+        DeleteteItem();
+    }
+
+    public void DeleteteItem(){
+        int none = 0;
+        BonusDamage = none;
+        duration = none;
+        healhing = none;
+        type  = "";
+        description = "";
+        empty = true;
+        SlotIcon.GetComponent<Image>().sprite = noneIcon;
     }
 
 }

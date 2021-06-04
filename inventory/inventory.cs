@@ -46,7 +46,7 @@ public class inventory : MonoBehaviour
 
     }
 
-private void OnTriggerEnter2D(Collider2D other) {
+private void  OnTriggerEnter2D(Collider2D other) {
     if(other.tag=="Item"){
         
         GameObject itemPickup  = other.gameObject;
@@ -57,7 +57,7 @@ private void OnTriggerEnter2D(Collider2D other) {
 
         Additem(itemPickup,item.id,item.type,item.description,item.icon,ItemBonus.BonusDamage,ItemBonus.duration,ItemBonus.Healhing);
     
-        Destroy(itemPickup);
+        //Destroy(itemPickup);
     }
 }
 
@@ -77,14 +77,14 @@ public void Additem (GameObject itemObject,int ItemID,string ItemType,string Ite
             slots[i].GetComponent<Slot>().healhing = health;
 
             itemObject.transform.parent = slots[i].transform;
+            
             itemObject.SetActive(false);
 
             slots[i].GetComponent<Slot>().updateSlot();
 
             slots[i].GetComponent<Slot>().empty = false;
             break;
-        }
-        
+        }   
     }
 }
 

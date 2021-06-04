@@ -16,7 +16,7 @@ public class moneyScript : MonoBehaviour
     }
 
     public void viewCash(){
-        Debug.Log(cash);
+        
     }
 
     public bool decrementCash(int decremet){

@@ -18,7 +18,7 @@ public class item : MonoBehaviour
         }
     }*/
 
-    public void AppliEffect(int id,int BonusDamage,int healthing,float duration){
+    /*public void AppliEffect(int id,int BonusDamage,int healthing,float duration){
         Id = id;
         this.BonusDamage = BonusDamage;
         this.duration  = duration;
@@ -27,5 +27,5 @@ public class item : MonoBehaviour
         playerMove player = GetComponent<playerMove>();
         player.damageBonus(this.BonusDamage,this.duration,this.Healhing);
     }
-
+*/
 }

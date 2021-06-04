@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class playerMove : MonoBehaviour
 {
+    //public references
     public GameObject Bullet;
     public float JumpForce;
     public float speed;
     public int DamageBonus;
 
+    public playerUI PlayerUI;
+
+    //private references
+    private int MaxHealth = 100;
     private Rigidbody2D Rigidbody2D; 
     private float Horizontal;
     private bool suelo;
     private Animator Animator;
     private float LastShoot;
-    public int health = 10;
+    public int health;
     private float TimeBonus;
     private float bonusInitTime;
+
+    private float HealthRange;
 
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        health = MaxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        HealthRange = (float)health / (float)MaxHealth;
+        
+        PlayerUI.SetHealth(HealthRange);
+
         Horizontal = Input.GetAxisRaw("Horizontal");
 
         if(Horizontal < 0.0f){
@@ -51,7 +63,6 @@ public class playerMove : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) && Time.time >  LastShoot + 0.25f){
             shoot();
-            Debug.Log(DamageBonus);
             LastShoot = Time.time;
         }
 
@@ -62,7 +73,6 @@ public class playerMove : MonoBehaviour
 
         if((Time.time - bonusInitTime)>TimeBonus&& DamageBonus != 0) {
             DamageBonus = 0;    
-            Debug.Log(DamageBonus);
         }
     }
 
@@ -99,7 +109,7 @@ public class playerMove : MonoBehaviour
         TimeBonus = time;
         bonusInitTime = Time.time;
         for(int i=0;i < healhing;i++){
-            if(health == 10){
+            if(health == MaxHealth){
                 break;
             }
             else{
